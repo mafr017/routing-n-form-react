@@ -5,8 +5,8 @@ export default function NotFound() {
     // Func
 
     return (
-        <div>
-            PAGES NOT FOUND
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <h1>PAGES NOT FOUND</h1>
             <NavLink to={'/'}>Back to Home</NavLink>
         </div>
     );

@@ -4,5 +4,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+}
+
+.custom-h1 {
+  background: linear-gradient(to right, yellow 0%, blue 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
