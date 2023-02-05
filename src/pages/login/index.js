@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
 
 export default function Login({loginset}) {
     // Hooks
@@ -17,7 +16,6 @@ export default function Login({loginset}) {
 
     return (
         <div className="App">
-            <NavLink to={'/'}>Go to Home</NavLink>
             <span style={{ marginBottom: '30px' }}>Login</span>
             <form onSubmit={handleSubmit(handleLogin)}>
                 <div>
