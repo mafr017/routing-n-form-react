@@ -1,10 +1,7 @@
-import { useState } from "react";
+/** Libs */
 import { useForm } from "react-hook-form";
 
 export default function FormPendaftaran() {
-    // State
-    const [isError, isErrorSet] = useState(false);
-
     // Hooks
     const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onSubmit' });
 
