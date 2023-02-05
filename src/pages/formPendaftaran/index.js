@@ -11,18 +11,11 @@ export default function FormPendaftaran() {
     // Handler
     const handleLogin = (e) => {
         console.log(e);
-        if (e.suratKesungguhan.length < 1) {
-            alert('Data Pendaftar Tidak Sesuai');
-            isErrorSet(true);
-        } else {
-            alert(`Data Pendaftar "` + e.nama + `" Berhasil Diterima`);
-            isErrorSet(false);
-            reset();
-        }
+        alert(`Data Pendaftar "` + e.nama + `" Berhasil Diterima`);
+        reset();
     }
     const handleError = (errors, e) => {
         console.log(errors);
-        isErrorSet(true);
         alert('Data Pendaftar Tidak Sesuai')
     };
 
@@ -110,12 +103,12 @@ export default function FormPendaftaran() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="formFile" className="form-label">Foto Surat Kesungguhan:</label>
-                    <input className="form-control" type="file" id="formFile" {...register("suratKesungguhan")} />
-                    {isError && <div className="text-danger">Harus Melampirkan Foto Surat Kesungguhan</div>}
+                    <input className="form-control" type="file" id="formFile" {...register("suratKesungguhan", { required: { value: true, message: 'Kelas Coding Harus Pilih Salah Satu' } })} />
+                    {errors?.suratKesungguhan && <div className="text-danger">{errors?.suratKesungguhan.message}</div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlTextarea1" className="form-label">Harapan Untuk Coding Bootcamp Ini:</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" {...register("harapan", { required: true })}></textarea>
+                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" {...register("harapan")}></textarea>
                 </div>
                 <div className="row gap-3">
                     <button type="submit" className="btn btn-success col-auto">Submit</button>
