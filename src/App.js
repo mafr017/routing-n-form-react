@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
+import { useAuth } from './hooks/auth';
+import NotFound from './pages/404';
+import About from './pages/about';
+import Home from './pages/home';
+import Login from './pages/login';
 
-function App() {
+export default function App() {
+  const { isLoggedIn, isLoggedInSet } = useAuth();
+  const navigate = useNavigate();
+  // func
+  const handleLogin = val => {
+    isLoggedInSet(val)
+    navigate('/')
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isLoggedIn ? (
+        <Routes>
+          <Route path='/about' element={<About />}></Route>
+          <Route path='/not-found' element={<NotFound />}></Route>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='*' element={<Navigate to={'/not-found'} replace />}></Route>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path='/login' element={<Login loginset={handleLogin} />}></Route>
+          <Route path='*' element={<Navigate to={'/login'} replace />}></Route>
+        </Routes>
+      )
+      }
+
+    </>
   );
 }
-
-export default App;
