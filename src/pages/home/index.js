@@ -1,8 +1,10 @@
 /** Libs */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 /** Assets */
 import '../../App.css';
+import { submitData } from '../../store/reducer-kegiatan';
 
 export default function Home() {
     // State
@@ -10,6 +12,13 @@ export default function Home() {
     const [indeks, indeksSet] = useState(0)
     const [isCompleted, isCompletedSet] = useState(false)
     const [listkegiatans, listkegiatansSet] = useState([]);
+
+    // Hooks
+    const { data: dataKegiatan } = useSelector((state) => state.kegiatan);
+    const dispatch = useDispatch();
+
+    // Func
+
 
     // Handler
     const onSubmitHandler = (e) => {
@@ -21,6 +30,7 @@ export default function Home() {
             isCompletedSet(false)
             indeksSet((prev) => prev + 1)
             listkegiatansSet((prev) => [...prev, { kegiatan, indeks, isCompleted }])
+            dispatch(submitData({ kegiatan: kegiatan, i: indeks, completed: isCompleted }))
             kegiatanSet("")
         }
     }
