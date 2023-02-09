@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+/** Libs */
+import { useParams } from "react-router-dom";
 import { useFetchers } from "../../hooks/fetcher";
 
 export default function AboutDetail() {

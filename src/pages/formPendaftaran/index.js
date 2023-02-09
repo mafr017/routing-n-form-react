@@ -1,5 +1,8 @@
+/** Libs */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { submitDataUser } from "../../store/reducer-pendaftaran";
 
 export default function FormPendaftaran() {
     // State
@@ -7,29 +10,35 @@ export default function FormPendaftaran() {
 
     // Hooks
     const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onSubmit' });
+    const dispatch = useDispatch();
 
     // Handler
-    const handleLogin = (e) => {
+    const handleRegister = (e) => {
         console.log(e);
         if (e.suratKesungguhan.length < 1) {
             alert('Data Pendaftar Tidak Sesuai');
             isErrorSet(true);
         } else {
             alert(`Data Pendaftar "` + e.nama + `" Berhasil Diterima`);
+            dispatch(submitDataUser(e))
             isErrorSet(false);
             reset();
         }
     }
     const handleError = (errors, e) => {
         console.log(errors);
-        isErrorSet(true);
+        if (errors.suratKesungguhan !== undefined) {
+            isErrorSet(true);
+        } else {
+            isErrorSet(false);
+        }
         alert('Data Pendaftar Tidak Sesuai')
     };
 
     return (
         <div className="App">
             <h1 className="mb-5">Pendaftaran Peserta Coding Bootcamp</h1>
-            <form onSubmit={handleSubmit(handleLogin, handleError)}>
+            <form onSubmit={handleSubmit(handleRegister, handleError)}>
                 <div className="mb-3">
                     <label htmlFor="namaPeserta" className="form-label">Nama Lengkap:</label>
                     <input className="form-control" id="namaPeserta" {...register("nama", {
@@ -110,12 +119,12 @@ export default function FormPendaftaran() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="formFile" className="form-label">Foto Surat Kesungguhan:</label>
-                    <input className="form-control" type="file" id="formFile" {...register("suratKesungguhan")} />
+                    <input className="form-control" type="file" id="formFile" {...register("suratKesungguhan", { required: { value: true, message: 'Harus Melampirkan Foto Surat Kesungguhan' } })} />
                     {isError && <div className="text-danger">Harus Melampirkan Foto Surat Kesungguhan</div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlTextarea1" className="form-label">Harapan Untuk Coding Bootcamp Ini:</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" {...register("harapan", { required: true })}></textarea>
+                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" {...register("harapan")}></textarea>
                 </div>
                 <div className="row gap-3">
                     <button type="submit" className="btn btn-success col-auto">Submit</button>

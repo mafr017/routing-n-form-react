@@ -15,9 +15,11 @@ import Login from './pages/login';
 import AboutDetail from './pages/about/about-detail';
 
 export default function App() {
+  // State
   const { isLoggedIn, isLoggedInSet } = useAuth();
   const navigate = useNavigate();
-  // func
+
+  // Func
   const handleLogin = val => {
     isLoggedInSet(val)
     navigate('/')
@@ -27,13 +29,6 @@ export default function App() {
     <div>
       <Navbar />
       <div className='container mt-5'>
-        {/* <Routes>
-          <Route path='/pendaftaran' element={<FormPendaftaran />}></Route>
-          <Route path='/about' element={<About />}></Route>
-          <Route path='/not-found' element={<NotFound />}></Route>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='*' element={<Navigate to={'/not-found'} replace />}></Route>
-        </Routes> */}
         <>
           {isLoggedIn ? (
             <Routes>
