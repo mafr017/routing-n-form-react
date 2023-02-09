@@ -1,7 +1,7 @@
 /** Libs */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { submitDataUser } from "../../store/reducer-pendaftaran";
 
 export default function FormPendaftaran() {

@@ -7,7 +7,7 @@ import reducerPendaftaran from "./reducer-pendaftaran";
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['kegiatan', 'users']
+    whitelist: ['users']
 }
 
 const persistedReducer = persistReducer(persistConfig, combineReducers({
