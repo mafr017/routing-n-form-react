@@ -100,7 +100,7 @@ export default function FormPendaftaran() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="formFile" className="form-label">Foto Surat Kesungguhan:</label>
-                    <input className="form-control" type="file" id="formFile" {...register("suratKesungguhan", { required: { value: true, message: 'Kelas Coding Harus Pilih Salah Satu' } })} />
+                    <input className="form-control" type="file" id="formFile" {...register("suratKesungguhan", { required: { value: true, message: 'Harus Melampirkan Foto Surat Kesungguhan' } })} />
                     {errors?.suratKesungguhan && <div className="text-danger">{errors?.suratKesungguhan.message}</div>}
                 </div>
                 <div className="mb-3">
